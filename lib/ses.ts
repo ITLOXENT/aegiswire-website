@@ -1,7 +1,7 @@
 import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
 
 const sesClient = new SESClient({
-  region: 'us-east-1',
+  region: 'us-west-2',
 });
 
 export async function sendLeadNotification(leadEmail: string, country: string) {

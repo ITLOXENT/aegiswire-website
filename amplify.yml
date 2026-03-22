@@ -3,8 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - rm -rf node_modules
-        - npm install
+        - npm ci
     build:
       commands:
         - npx next build
@@ -13,4 +12,6 @@ frontend:
     files:
       - '**/*'
   cache:
-    paths: []
+    paths:
+      - node_modules/**/*
+      - .next/cache/**/*
