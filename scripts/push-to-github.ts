@@ -86,7 +86,8 @@ async function pushToGitHub() {
       console.log('Created blob for:', file);
     }
 
-    const { data: tree } = await octokit.rest.git.createTree({ owner: OWNER, repo: REPO, tree: treeItems, base_tree: baseCommit.tree.sha });
+    // No base_tree — creates a fully clean tree, removing any old/deleted files
+    const { data: tree } = await octokit.rest.git.createTree({ owner: OWNER, repo: REPO, tree: treeItems });
     console.log('Created tree:', tree.sha);
 
     const timestamp = new Date().toISOString().slice(0, 16).replace('T', ' ');
@@ -104,7 +105,7 @@ async function pushToGitHub() {
     try {
       const { AmplifyClient, StartJobCommand } = await import('@aws-sdk/client-amplify');
       const amplify = new AmplifyClient({
-        region: 'us-west-2',
+        region: 'us-east-2',
         credentials: {
           accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
           secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
